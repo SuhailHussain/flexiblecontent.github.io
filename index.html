@@ -19,11 +19,16 @@
             display: block;
         }
         #login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             background-color: #f5f5f5;
+            z-index: 1000;
         }
         #login-box {
             background: white;
@@ -58,7 +63,7 @@
             font-size: 14px;
         }
         .hidden {
-            display: none;
+            display: none !important;
         }
     </style>
 </head>
@@ -75,13 +80,12 @@
 
     <iframe 
         id="figma-frame"
-        class="hidden"
         src="https://embed.figma.com/proto/C9Vt075l2uCYN0kkecMhMM/Topical-Events-Prototypes?page-id=0%3A1&node-id=1-1288&viewport=1004%2C194%2C0.24&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A1288&hotspot-hints=0&show-proto-sidebar=1&embed-host=share" 
         allowfullscreen>
     </iframe>
 
     <script>
-        const correctPassword = "flexible"; // Change this to your password
+        const correctPassword = "your-password-here"; // Change this to your password
 
         // Check if already authenticated
         if (sessionStorage.getItem('authenticated') === 'true') {
@@ -100,7 +104,6 @@
 
         function showContent() {
             document.getElementById('login-container').classList.add('hidden');
-            document.getElementById('figma-frame').classList.remove('hidden');
         }
     </script>
 </body>
