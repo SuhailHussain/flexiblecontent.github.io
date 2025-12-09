@@ -18,12 +18,90 @@
             height: 100vh;
             display: block;
         }
+        #login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        #login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 30px;
+            font-size: 16px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        .error {
+            color: #d32f2f;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div id="login-container">
+        <div id="login-box">
+            <h2>Enter Password</h2>
+            <input type="password" id="password-input" placeholder="Password" onkeypress="if(event.key==='Enter') checkPassword()">
+            <br>
+            <button onclick="checkPassword()">Access</button>
+            <div id="error-message" class="error hidden">Incorrect password</div>
+        </div>
+    </div>
+
     <iframe 
-        src="https://embed.figma.com/proto/aUSvE1yqpeU6fzGJvhsdIL/Topical-Events-Update-Concepts-v3?page-id=4512%3A15952&node-id=4571-6098&p=f&viewport=1561%2C519%2C0.02&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4571%3A6098&show-proto-sidebar=1&embed-host=share" 
+        id="figma-frame"
+        class="hidden"
+        src="https://embed.figma.com/proto/C9Vt075l2uCYN0kkecMhMM/Topical-Events-Prototypes?page-id=0%3A1&node-id=1-1288&viewport=1004%2C194%2C0.24&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A1288&hotspot-hints=0&show-proto-sidebar=1&embed-host=share" 
         allowfullscreen>
     </iframe>
+
+    <script>
+        const correctPassword = "flexible"; // Change this to your password
+
+        // Check if already authenticated
+        if (sessionStorage.getItem('authenticated') === 'true') {
+            showContent();
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            if (input === correctPassword) {
+                sessionStorage.setItem('authenticated', 'true');
+                showContent();
+            } else {
+                document.getElementById('error-message').classList.remove('hidden');
+            }
+        }
+
+        function showContent() {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('figma-frame').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
